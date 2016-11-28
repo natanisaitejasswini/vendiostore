@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta  name='google-signin-client_id' content='129903945144-jjlo2kdi5fpv8b15m8b6dhbjkcpfndls.apps.googleusercontent.com'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="./static/css/landing/style.css">
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<!-- materialized -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+
+	<script type="text/javascript">
+	var bgImageindex = 0;
+		var bgImagesArr = [
+		'/static/images/login_3.jpg',
+		'/static/images/login_2.jpg',
+		'/static/images/login_1.jpg'
+		];
+		function changeBg(){
+			var index = bgImageindex ++ % bgImagesArr.length;
+			$("body").css({"background": "url('" + bgImagesArr[index] +"')", "background-size": "cover", "background-repeat": "no-repeat"});
+		}
+	$(document).ready(function(){
+		// $('#loginBox').hide()
+		changeBg()
+		setInterval(changeBg, 8000)
+
+	//************************************************************************************************
+
+		$('#loginBtn').click(function(){
+			$('#wrapper').hide()
+			$('#loginBox').show()
+		})
+		$('.btnBox').click(function(){
+			$('#wrapper').hide()
+			$('#loginBox').show()
+		})
+		$('#x').click(function(){
+			$('#wrapper').show()
+			$('#loginBox').hide()
+
+		})
+
+		function onSignIn(googleUser) {
+		  var profile = googleUser.getBasicProfile();
+		  console.log('ID: ' + id_token); // Do not send to your backend! Use an ID token instead.
+		  console.log('Name: ' + profile.getName());
+		  console.log('Image URL: ' + profile.getImageUrl());
+		  console.log('Email: ' + profile.getEmail());
+
+		  // The ID token you need to pass to your backend:
+        var id_token = googleUser.getAuthResponse().id_token;
+        console.log("ID Token: " + id_token);
+    }
+
+
+
+
+		$('#fbLogin').click(function(){
+			FB.login(function(response){
+				if(response.status==='connected'){
+					FB.api('/me', 'GET', {fields: 'last_name,first_name, email, picture.width(300).height(300)'}, function(response) {
+						$('#first_name').val(response.first_name)
+						$('#last_name').val(response.last_name)
+						$('#email').val(response.email)
+						$('#picture').val(response.picture.data.url)
+						$('#id').val(response.id)
+						var data = {
+							first_name : $('#first_name').val(),
+							last_name : $('#last_name').val(),
+							email : $('#email').val(),
+							picture: $('#picture').val(),
+							fbid : $('#id').val()
+						}
+						$.ajax({
+							url: "/login",
+							type: "POST",
+							data: JSON.stringify(data),
+							contentType: "application/json",
+							success: function(output) {
+								if(output.status === 'success') {
+									$(location).attr('href','/main');
+								}
+							}
+						});
+					});
+				}
+			}, {scope: 'email'})
+		})
+	})
+	//************************************************************************************************
+	</script>
+</head>
+<body>
+	<script>
+		window.fbAsyncInit = function() {
+	    FB.init({
+	      appId      : '1275412172478743',
+	      xfbml      : true,
+	      version    : 'v2.7'
+	    });
+		};
+		(function(d, s, id){
+		 var js, fjs = d.getElementsByTagName(s)[0];
+		 if (d.getElementById(id)) {return;}
+		 js = d.createElement(s); js.id = id;
+		 js.src = "//connect.facebook.net/en_US/sdk.js";
+		 fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+	<!-- HTML for landing page -->
+		<wrapper>
+			<div id='loginBox'>
+				<p class="post_fb">We won't post anything to your Facebook, seriously.</p>
+				<button id='fbLogin' class='logBtns'>Login with facebook</button>
+			</div>
+					<form>
+						<input type='hidden' id='first_name' name='first_name'>
+						<input type='hidden' id='last_name' name='last_name'>
+						<input type='hidden' id = 'email' name = 'email'>
+						<input type='hidden' id = 'picture' name = 'picture'>
+						<input type='hidden' id='id' name='id'>
+					</form>
+		</wrapper>
+
+</body>
+</html>

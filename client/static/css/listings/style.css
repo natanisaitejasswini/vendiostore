@@ -1,0 +1,29 @@
+#wrapper {
+  padding: 15px;
+  width: 960px;
+  margin: 0 auto;
+}
+
+.product_image{
+  height: 200px;
+  width: 200px;
+}
+
+.product_name{
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.view_this_product{
+  color: white;
+  background-color: salmon;
+}
+
+.collection{
+  width: 200px;
+  margin: none;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  margin-top: -5px;
+}

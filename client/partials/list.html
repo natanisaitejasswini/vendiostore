@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="./../static/css/dashboard/styles.css">
+</head>
+<body>
+</body>
+</html>
+
+<div ng-controller="listController as LC">
+	<div id="wrapper">
+
+<!-- ____________FB Profile________________________ -->
+		<div class="container">
+			<ul class="collection" id="top_stays_the_same">
+			 <li class="collection-item avatar">
+				 <img ng-show="LC.current_user" ng-src='{{LC.current_pic}}' class="circle">
+				 <span class="title" ng-show="LC.current_user">Hi {{ LC.current_user }}</span>
+				 <span class="title" class="logged_in_user" ng-hide="LC.current_user"><a href="/">Sign In </a></span>
+				 <span class="title" class="logged_in_user" ng-show="LC.current_user"><a href='/user/logout'>Logout</a></span>
+			 </li>
+			</ul>
+		</div>
+<!-- ____________When User Not Logged In________________________ -->
+	<div ng-hide="LC.current_user" class="display_message">
+		<h3>Please Sign In to see your products listing!</h3>
+	</div>
+
+	<div ng-hide="LC.prod" style="color: red">
+		<h3 ng-show='LC.current_user'>You have not listed any products yet!</h3>
+	</div>
+	<div ng-show="LC.prod">
+	<h5 ng-show="LC.current_user" class="cart_check_out">My Products Listing!</h5>
+	</div>
+
+<!-- ____________My Listings________________________ -->
+	<div ng-repeat="product in LC.allProducts" class="listings" ng-show="LC.current_user">
+		<div class="card_size">
+			<div class="col s12 m7">
+				<div class="card horizontal">
+					<div class="card-image">
+						<img class="product_image" ng-src="{{product.imageUrl}}">
+					</div>
+					<div class="card-stacked">
+						<div class="card-content">
+							<p class="product_name">{{product.product_name}}  </p>
+							<p>{{product.description}} </p>
+							<p><b>Price: </b> ${{product.price}} </p>
+						</div>
+						<div class="card-action">
+							<a href="#/show/{{product._id}}"><button ng-click="LC.getOneProduct(product._id)" class="view_this_product">View this product</button></a>
+							<a href="#/edit/{{product._id}}"><button ng-click="LC.getOneProduct(product._id)" class="view_this_product">Edit</button></a>
+							<button ng-click="LC.deleteProduct(product._id)" class="delete_button">Delete</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!--end of container-->
+</div><!--end of wrapper-->
+</div>
+<style>
+	#hide_this, #hide_heart{display:none}
+</style>

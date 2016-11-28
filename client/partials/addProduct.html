@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="./../static/css/dashboard/styles.css">
+</head>
+<body>
+</body>
+</html>
+<div ng-controller="productController as PC">
+	<div id="wrapper">
+		<div class="container">
+				<ul class="collection" id="top_stays_the_same">
+				 <li class="collection-item avatar">
+					 <img ng-show="PC.current_user" ng-src='{{PC.current_pic}}' class="circle">
+					 <span class="title" ng-show="PC.current_user">Hi {{ PC.current_user }}</span>
+					 <span class="title" class="logged_in_user" ng-hide="PC.current_user"><a href="/">Sign In </a></span>
+					 <span class="title" class="logged_in_user" ng-show="PC.current_user"><a href='/user/logout'>Logout</a></span>
+				 </li>
+				</ul>
+		</div> 		<!-- end of container -->
+
+				<div ng-hide="PC.current_user" class="display_message">
+					<h3>Please Sign In to list a product on this site!</h3>
+				</div>
+
+				<div class="add_product" ng-show="PC.current_user">
+					<h5 class="cart_check_out">Add New Product!</h5>
+<!-- new form -->
+						<div class="row">
+						<div class='card-panel grey lighten-3 form col s8' id='resize_box'>
+						<form class="col s12" name="myForm" ng-submit="PC.addProduct()">
+
+						<div class="row">
+					        <div class="input-field col s4">
+					          <input placeholder='Product Name' type="text" class="validate" ng-model="PC.newProduct.product_name" required>
+					        </div>
+					        <div class="input-field col s4">
+								<input placeholder='Product Description' type="text" class="validate" ng-model="PC.newProduct.description" required>
+							</div>
+				      	</div>
+							<select class="browser-default" ng-model="PC.newProduct.category">
+								<option value="" disabled selected>Choose your category</option>
+								<option>Electronic Appliances</option>
+								<option>Sports Equipments</option>
+								<option>Accessories</option>
+								<option>Musical Instruments</option>
+								<option>Toys and VideoGames</option>
+								<option>Clothing</option>
+								<option>Food</option>
+								<option>Paintings and Fine Arts</option>
+							</select>
+
+							<div class="row">
+								<div class="input-field col s4">
+									<input placeholder='Quantity Available ex: 1, 10' type="number" ng-model="PC.newProduct.quantity" required>
+								</div>
+								<div class="input-field col s4">
+									<input placeholder='Product Price' type="text" class="validate" ng-model="PC.newProduct.price" required>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="input-field col s6">
+									<input placeholder='Image URL' type="text" class="validate" ng-model="PC.newProduct.imageUrl">
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="input-field col s4">
+									<input placeholder='Product Weight' type="text" class="validate" ng-model="PC.newProduct.weight" required>
+								</div>
+								<div class="input-field col s4">
+									<input placeholder='Product Manufacturer' type="text" class="validate" ng-model="PC.newProduct.manufacturer" required>
+								</div>
+							</div>
+							<input type="submit" value="Add" class='btn waves-effect' style='background-color:salmon'>
+						</form>
+						</div>
+					</div>
+<!-- end new form -->
+
+	<!-- add product current user -->
+
+
+	</div><!-- end of wrapper -->
+</div>
+<style>
+	#hide_this, #hide_heart{
+	display:none;
+	}
+	.browser-default{
+		width: 410px;
+	}
+	#resize_box{
+		margin-left: 160px;
+	}
+</style>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="./../static/css/dashboard/styles.css">
+</head>
+<body>
+</body>
+</html>
+
+<div ng-controller="listController as LC">
+	<div id="wrapper">
+<!-- ____________FB Profile________________________ -->
+		<div class="container">
+			<ul class="collection" id="top_stays_the_same">
+			 <li class="collection-item avatar">
+				 <img ng-show="LC.current_user" ng-src='{{LC.current_pic}}' class="circle">
+				 <span class="title" ng-show="LC.current_user">Hi {{ LC.current_user }}</span>
+				 <span class="title" class="logged_in_user" ng-hide="LC.current_user"><a href="/">Sign In </a></span>
+				 <span class="title" class="logged_in_user" ng-show="LC.current_user"><a href='/user/logout'>Logout</a></span>
+			 </li>
+			</ul>
+		</div>
+
+		<div class="add_product">
+		<h5 class='move_center'>Edit your product!</h5>
+			<div class="row">
+				<div class='card-panel grey lighten-3 form col s8' id='resize_box'>
+					<form class="col s12" name="myForm" ng-submit="LC.editProduct(LC.oneProduct._id)">
+						<div class="row">
+							<div class="input-field col s4">
+								Name: <input id="edit_prod" placeholder='Product Name' type="text" class="validate" ng-model="LC.prod.product_name"  ng-value="LC.oneProduct.product_name" required>
+							</div>
+								<div class="input-field col s4">
+								Description: <input id="edit_prod" placeholder='Product Description' type="text" class="validate" ng-model="LC.prod.description" ng-value="LC.oneProduct.description" required>
+								</div>
+						</div>
+
+						<div class="row">
+							<div class="input-field col s4">
+							Quantity: <input id="edit_prod" placeholder='Product Quantity' type="text" class="validate" ng-model="LC.prod.quantity" ng-value="LC.oneProduct.quantity" required>
+							</div>
+							<div class="input-field col s4">
+								Price: <input id="edit_prod" placeholder='Product Price' type="text" class="validate" ng-model="LC.prod.price" ng-value="LC.oneProduct.price" required>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="input-field col s8">
+								Image URL: <input  id="edit_prod" placeholder='Image URL' type="text" class="validate" ng-model="LC.prod.imageUrl" ng-value="LC.oneProduct.imageUrl" required>
+							</div>
+						</div>
+
+						<input type="submit" value="Save Changes" class='btn waves-effect' style='background-color:salmon'>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div><!--end of wrapper-->
+</div>
+<style>
+	#hide_this, #hide_heart{display:none}
+	#resize_box{margin-left: 160px;}
+	.move_center{text-align: center;}
+</style>

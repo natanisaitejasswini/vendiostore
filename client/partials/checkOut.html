@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="./../static/css/dashboard/styles.css">
+</head>
+<body>
+</body>
+</html>
+
+<div ng-controller="showCartController as CC">
+	<div id="wrapper">
+<!-- ____________FB Profile________________________ -->
+		<div class="container">
+			<ul class="collection" id="top_stays_the_same">
+			 <li class="collection-item avatar">
+				 <img ng-show="CC.current_user" ng-src='{{CC.current_pic}}' class="circle">
+				 <span class="title" ng-show="CC.current_user">Hi {{ CC.current_user }}</span>
+				 <span class="title" class="logged_in_user" ng-hide="CC.current_user"><a href="/">Sign In </a></span>
+				 <span class="title" class="logged_in_user" ng-show="CC.current_user"><a href='/user/logout'>Logout</a></span>
+			 </li>
+			</ul>
+		</div>
+	<!-- ____________Shipping Info________________________ -->
+
+			<h5 class='move_center'>Enter Your Shipping Details</h5>
+			<div class='card-panel grey lighten-3 form col s8' id='resize_box_checkout'>
+			<form class="col s6">
+			<!-- ....................... -->
+				<div class="row" id="checkout_form">
+			        <div class="input-field col s6">
+			          <input placeholder='Address' type="text" class="validate">
+			        </div>
+			        <div class="input-field col s6">
+						<input placeholder='City' type="text" class="validate">
+					</div>
+				</div>
+				<div class="row" id="checkout_form">
+			        <div class="input-field col s6">
+			          <input placeholder='State' type="text" class="validate">
+			        </div>
+			        <div class="input-field col s6">
+						<input placeholder='Zipcode' type="text" class="validate">
+					</div>
+				</div>
+				<div class="row" id="checkout_form">
+			        <div class="input-field col s6">
+			          <input placeholder='Phone Number' type="text" class="validate">
+			        </div>
+			    </div>
+			</form>
+			</div>
+			<div class="delivery_method">
+				<h4>Choose A Delivery Method</h4>
+				<p>
+					<input type="radio" name="delivery" value="express" id="radio1" />
+					<label for="radio">Express delivery (within 1 day)</label>
+				</p>
+				<p>
+					<input type="radio" name="delivery" value="standard" checked id="radio2" />
+					<label for="radio">Standard delivery (within 2-3 days)</label>
+				</p>
+			</div>
+
+			<h4>Review Order</h4>
+			<div ng-repeat = "cart in CC.allProducts" class="cart_product2">
+
+				<img ng-src="{{cart.product_imageUrl}}" height= "80" width= "90">
+					<h5>{{cart.product_name}} - ${{cart.product_price}}</h5>
+					<p>	Qty: {{cart.product_quantity}}</p>
+					<!-- <p>Total: ${{cart.total}}</p> -->
+
+			</div>
+			<h4>Total Amount: ${{CC.val.value}}</h4>
+			<a href ng-click="CC.checkOut()"><button id="check_out_button"><b>Place Order!</b></button></a>
+
+
+		</div><!--end of container-->
+	</div><!--end of wrapper-->
+</div>
+<style>
+	#hide_this, #hide_heart{display:none
+	}
+	#resize_box{
+		margin-left: 160px;
+	}
+	.move_center{
+		text-align: center;
+		/*margin-left: 10px;*/
+	}
+</style>

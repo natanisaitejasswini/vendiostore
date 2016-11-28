@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="./../static/css/dashboard/styles.css">
+</head>
+<body>
+</body>
+</html>
+
+<div ng-controller="ShowProdController as PC">
+	<div id="wrapper">
+<!-- ____________FB Profile________________________ -->
+
+		<div class="container">
+			<ul class="collection">
+			 <li class="collection-item avatar">
+				 <img ng-show="PC.current_user" ng-src='{{PC.current_pic}}' class="circle">
+				 <span class="title" ng-show="PC.current_user">Hi {{ PC.current_user }} </span>
+				 <span class="title" class="logged_in_user" ng-hide="PC.current_user"><a href="/">Sign In </a></span>
+				 <span class="title" class="logged_in_user" ng-show="PC.current_user"><a href='/user/logout'>Logout</a></span>
+			 </li>
+			</ul>
+<!-- ____________Search Bar________________________ -->
+			<nav class='search_bar'>
+				<div class="nav-wrapper" >
+					<form>
+						<div class="input-field" >
+								<input id="search" type="search" placeholder="Search for a product" class="form-control" ng-model="search.product_name">
+								<label for="search"><i class="material-icons">search</i></label>
+								<i class="material-icons">close</i>
+						</div>
+					</form>
+				</div>
+			</nav>
+<!-- ____________Display Products________________________ -->
+			<div class="products" ng-repeat="product in PC.allProducts | filter:search:strict">
+
+				<div class="col s12 m7">
+					<div class="card horizontal">
+						<div class="card-image">
+							<img class="product_image" ng-src="{{product.imageUrl}}">
+						</div>
+						<div class="card-stacked">
+							<div class="card-content">
+								<p class="product_name">{{product.product_name}}  </p>
+								<p>{{product.description}} </p>
+								<p><b>Price: </b> ${{product.price}} </p>
+							</div>
+							<div class="card-action">
+								<a href="#/show/{{product._id}}"><button class="view_this_product" ng-click="PC.getOneProduct(product._id)">View this product</button></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--end of container-->
+	</div><!--end of wrapper-->
+</div>
+<style>
+	#hide_this, #hide_heart{display:none}
+</style>

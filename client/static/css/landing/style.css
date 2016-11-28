@@ -1,0 +1,49 @@
+#wrapper {
+	min-width: 100%;
+	min-height: 600px;
+}
+body {
+	padding: 0px
+    background-image: url('/static/images/basketball.jpg');
+    background-repeat: no-repeat;
+    font-family: 'Lato', sans-serif;
+
+}
+
+#boxWrap{
+	margin-top: 20%;
+	text-align: center;
+}
+
+.logBtns{
+	display: inline-block;
+	vertical-align: middle;
+	height:50px;
+	width: 300px;
+	color: white;
+	font-size: 20px;
+	background-color: #ef5350;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 10px 5px 5px black;
+}
+
+#loginBox p{
+	margin-top: 300px;
+}
+
+#loginBox{
+	text-align: center;
+	padding-top: 30px;
+	min-height: 1000px;
+	min-width: 100%;
+}
+
+.post_fb{
+	font-size: 50px;
+	background-color: salmon;
+	margin-top: 300px;
+	color: white;
+	font-family: sans-serif;
+
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="./../static/css/dashboard/styles.css">
+</head>
+<body>
+</body>
+</html>
+
+<div ng-controller="ShowProdController as PC">
+	<div id="wrapper">
+<!-- ____________FB Profile________________________ -->
+
+		<div class="container">
+			<ul class="collection" id="top_stays_the_same">
+			 <li class="collection-item avatar">
+				 <img ng-show="PC.current_user" ng-src='{{PC.current_pic}}' class="circle">
+				 <span class="title" ng-show="PC.current_user">Hi {{ PC.current_user }} </span>
+				 <span class="title" class="logged_in_user" ng-hide="PC.current_user"><a href="/">Sign In </a></span>
+				 <span class="title" class="logged_in_user" ng-show="PC.current_user"><a href='/user/logout'>Logout</a></span>
+			 </li>
+			</ul>
+<!-- ____________Displaying Product Details________________________ -->
+
+		<div class="show_product">
+			<img id="show_image" ng-src="{{PC.oneProduct.imageUrl}}">
+
+			<div class="product_desc3">
+				<h5>{{PC.oneProduct.product_name}}</h5>
+				<p><b>Price: </b> ${{PC.oneProduct.price}}</p>
+				<p><b>Description: </b>{{PC.oneProduct.description}}</p>
+				<p>{{PC.oneProduct.technical_specifications}}</p>
+				<p><b>Item Weight: </b>{{PC.oneProduct.weight}} lb</p>
+				<p><b>Manufacturer: </b>{{PC.oneProduct.manufacturer}}</p>
+
+
+				<p ng-hide="PC.oneProduct.quantity" style="color:red;"><b>Currently Unavailable!</b></p>
+				<div ng-show="PC.oneProduct.quantity">
+					<h4 class="stock"><b>In Stock</b></h4>
+
+					<h5 class="stock">(Only {{PC.oneProduct.quantity}} left !!)</h5>
+
+					<p ng-show="PC.current_user" class="show_quantity">Quantity: <input id="add_border" type="text" ng-model="PC.newQty" required></p>
+
+					<button ng-click="PC.addToCart(PC.oneProduct._id)" ng-show="PC.current_user" id="check_out_button">Add to Cart</button>
+
+					<h5 ng-hide="PC.current_user">Sign in to buy this product!</h5>
+
+				</div>
+			</div>
+		</div>
+	</div><!--end of wrapper-->
+</div>
+<style>
+	#hide_this, #hide_heart{display:none}
+	.stock { text-align: center;}
+</style>
